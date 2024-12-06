@@ -1,6 +1,7 @@
 package day2
 
 import getResourceFile
+import splitToInts
 
 fun main() {
     val lines = getResourceFile("day2").readLines().splitToInts()
@@ -31,4 +32,4 @@ fun increasing(one: Int, two: Int): Boolean = (one - two) in -1 downTo -3
 
 fun decreasing(one: Int, two: Int): Boolean = (one - two) in 1..3
 
-fun List<String>.splitToInts(): List<List<Int>> = this.map { it.split(" ").map { number -> number.toInt() } }
+
