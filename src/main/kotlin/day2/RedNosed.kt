@@ -1,7 +1,7 @@
 package day2
 
-import getResourceFile
-import splitToInts
+import Utill.getResourceFile
+import Utill.splitToInts
 
 fun main() {
     val lines = getResourceFile("day2").readLines().splitToInts()

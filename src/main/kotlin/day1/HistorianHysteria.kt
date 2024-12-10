@@ -1,6 +1,6 @@
 package day1
 
-import getResourceFile
+import Utill.getResourceFile
 import kotlin.math.abs
 
 fun main() {

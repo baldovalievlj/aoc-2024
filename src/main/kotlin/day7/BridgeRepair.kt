@@ -1,7 +1,7 @@
 package day7
 
-import getResourceFile
-import splitToLongs
+import Utill.getResourceFile
+import Utill.splitToLongs
 
 fun main() {
     val lines = getResourceFile("day7").readLines()
@@ -11,11 +11,11 @@ fun main() {
     println(mapLines(lines).getSumsOfEquationWithConcatenation())
 }
 
-fun Map<Long, List<Long>>.getSumsOfEquation(): Long = this.getSumsPossibleWith{
+fun Map<Long, List<Long>>.getSumsOfEquation(): Long = this.getSumsPossibleWith {
     findCombinations(0, 0)
 }
 
-fun Map<Long, List<Long>>.getSumsOfEquationWithConcatenation(): Long = this.getSumsPossibleWith{
+fun Map<Long, List<Long>>.getSumsOfEquationWithConcatenation(): Long = this.getSumsPossibleWith {
     findCombinationsWithConcatenation(0, 0)
 }
 

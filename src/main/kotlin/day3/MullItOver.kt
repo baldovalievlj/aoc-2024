@@ -1,6 +1,6 @@
 package day3
 
-import getResourceFile
+import Utill.getResourceFile
 
 fun main() {
     val text = getResourceFile("day3").readText()

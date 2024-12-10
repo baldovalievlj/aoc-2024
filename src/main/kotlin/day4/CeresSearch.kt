@@ -1,6 +1,7 @@
 package day4
 
-import getResourceFile
+import Utill.Point
+import Utill.getResourceFile
 
 fun main() {
     val matrix: List<List<String>> = getResourceFile("day4").readLines().map { it.chunked(1) }
@@ -34,13 +35,13 @@ fun getNumberOfMas(matrix: List<List<String>>) = matrix.indices.flatMap { x: Int
 }.count { it }
 
 private fun List<List<String>>.isXmasInRange(range: Range): Boolean =
-    range.first.zip(range.second).mapNotNull{ (x, y) -> this.getIfSafe(x, y) }.joinToString("").isXmas()
+    range.first.zip(range.second).mapNotNull { (x, y) -> this.getIfSafe(Point(x, y)) }.joinToString("").isXmas()
 
 fun List<List<String>>.isMasInPoints(points: Pair<Point, Point>): Boolean =
-    points.let { (one, two) -> getIfSafe(one.first, one.second) to getIfSafe(two.first, two.second) }.isMas()
+    points.let { (one, two) -> getIfSafe(one) to getIfSafe(two) }.isMas()
 
-fun List<List<String>>.getIfSafe(x: Int, y: Int): String? =
-    if (x in this.indices && y in this[x].indices) this[x][y] else null
+fun List<List<String>>.getIfSafe(point: Point): String? =
+    if (point.isInRange(this.indices, this[point.x].indices)) this[point.x][point.y] else null
 
 fun getRanges(x: Int, y: Int): List<Range> = listOf(
     x.sameRange() to y.forwardRange(),
@@ -53,9 +54,9 @@ fun getRanges(x: Int, y: Int): List<Range> = listOf(
     x.backwardRange() to y.backwardRange(),
 )
 
-fun getDiagonalPoints(x: Int, y: Int): Pair<Point, Point> = (x - 1 to y - 1) to (x + 1 to y + 1)
+fun getDiagonalPoints(x: Int, y: Int): Pair<Point, Point> = Point(x - 1, y - 1) to Point(x + 1, y + 1)
 
-fun getAntiDiagonalPoints(x: Int, y: Int): Pair<Point, Point> = (x - 1 to y + 1) to (x + 1 to y - 1)
+fun getAntiDiagonalPoints(x: Int, y: Int): Pair<Point, Point> = Point(x - 1, y + 1) to Point(x + 1, y - 1)
 
 fun Int.forwardRange(): List<Int> = (this..this + 3).toList()
 
@@ -66,8 +67,5 @@ fun Int.sameRange(): List<Int> = List(4) { this }
 fun String.isXmas() = this == "XMAS"
 
 fun Pair<String?, String?>.isMas(): Boolean = this == Pair("S", "M") || this == Pair("M", "S")
-
-
-typealias Point = Pair<Int, Int>
 
 typealias Range = Pair<List<Int>, List<Int>>

@@ -1,7 +1,8 @@
 package day5
 
-import getResourceFile
-import splitToInts
+import Utill.getResourceFile
+import Utill.splitToInts
+import Utill.swap
 
 fun main() {
     val lines = getResourceFile("day5").readLines()
@@ -54,13 +55,6 @@ fun List<Int>.findWrongIndexOrNull(rules: Map<Int, List<Int>>, index: Int): Int?
         rules[this[index]]?.contains(it) ?: true
     }.takeIf { it >= 0 }
 
-fun List<Int>.swap(index: Int, toIndex: Int): List<Int> = this.mapIndexed { i, it ->
-    when (i) {
-        index -> this[toIndex]
-        toIndex -> this[index]
-        else -> it
-    }
-}
 
 fun mapToRules(lines: List<String>): Map<Int, List<Int>> = lines.map {
     val (one, two) = it.trim().split("|")
